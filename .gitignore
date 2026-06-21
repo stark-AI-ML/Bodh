@@ -1,22 +1,22 @@
-node_module
+node_modules
 .VSCodeCounter
 del
 test
 
-# saveNews.js
-# testYTOPT.js
-# testYTtranscript.js
-# newsWorker.js
-# updates.md
+saveNews.js
+testYTOPT.js
+testYTtranscript.js
+newsWorker.js
+updates.md
 
-# tempNewsData.js
+tempNewsData.js
 .env
-node_modules
+
 package-lock.json
-# generated.json
-# mockData.json
-# delete.js
-# mockData.js
-# test.js
-# testMock.js
-# tempCodeRunnerFile.js
+generated.json
+mockData.json
+delete.js
+mockData.js
+test.js
+testMock.js
+tempCodeRunnerFile.js

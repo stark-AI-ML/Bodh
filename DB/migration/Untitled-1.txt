@@ -1,0 +1,30 @@
+
+
+
+
+async function addNewsTask() {
+  try {
+    for (let i = 0; i < ChannelsConfig.length; i++) {
+      
+      // 🔥 generate unique time per channel
+      const nextRun = getNextRunTime();
+      const delay = nextRun.getTime() - Date.now();
+
+      await newsQueue.add("get-video-transcript", ChannelsConfig[i], {
+        delay,
+        jobId: `channel-${ChannelsConfig[i].id}`, // stable
+        attempts: 3,
+        backoff: {
+          type: "fixed",
+          delay: 5000,
+        },
+      });
+
+      console.log(`Job ${i} scheduled at: ${nextRun}`);
+    }
+
+    console.log("All jobs scheduled correctly.");
+  } catch (error) {
+    console.error("Error adding jobs:", error);
+  }
+}

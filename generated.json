@@ -1,0 +1,224 @@
+{
+    "headline": "अमित शाह ने पश्चिम बंगाल में घुसपैठ मुक्त बनाने का कहा",
+    "summary": "बोर्न एरर राष्ट्रीय सुरक्षा मंत्री अमित शाह ने बताया कि पार्टी पूरी पश्चिम बंगाल से घुसपैठियों को बाहर निकालने के लिए काम करेगी और ममता बनर्जी की सरकार को सिस्टम के जरिए सफाई कराएगी।",
+    "metadata": {
+      "category": "Politics",
+      "tags": ["West Bengal", "Immigration", "Amit Shah", "Trinamool Congress"],
+      "importance_score": 6,
+      "sentiment": "Negative"
+    },
+    "location": {
+      "state": "West Bengal",
+      "district": null,
+      "is_national": false
+    },
+    "entities": {
+      "people": ["अमित शाह", "ममता बनर्जी"],
+      "organizations": ["BJP", "TMC"],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "00:00",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "अम्बेडकर जयंती पर राष्ट्रीय स्तर पर श्रद्धांजलि",
+    "summary": "डॉ बी.आर. अंबेडकर की जयंती पर राष्ट्रपति, प्रधानमंत्री और कई राजनेता लखनऊ और कोलकाता में उनके सम्मान में कार्यक्रम करेंगे, जबकि कुछ प्रदेशों में विरोध प्रदर्शनों की संभावना थी।",
+    "metadata": {
+      "category": "Politics",
+      "tags": ["Ambedkar Jayanti", "Rashtriya", "Tribute"],
+      "importance_score": 4,
+      "sentiment": "Neutral"
+    },
+    "location": {
+      "state": null,
+      "district": null,
+      "is_national": true
+    },
+    "entities": {
+      "people": ["डॉ भीमराव अंबेडकर", "राष्ट्रपति", "प्रधानमंत्री"],
+      "organizations": [],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "01:03",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "महिला आरक्षण विधेयक पर बहस: बीजेपी‑TMC‑कांग्रेस के बीच टकराव",
+    "summary": "अमित शाह ने महिला आरक्षण बिल के 33% आरक्षण का वचन दिया, जबकि कई नेता इस पर विरोध व्यक्त कर रहे हैं। टीएमसी, कांग्रेस और एनसीपी ने बिल को लेकर अलग‑अलग रुख अपनाए हैं।",
+    "metadata": {
+      "category": "Politics",
+      "tags": ["Women Reservation Bill", "Amit Shah", "TMC", "Congress", "NCP"],
+      "importance_score": 5,
+      "sentiment": "Neutral"
+    },
+    "location": {
+      "state": null,
+      "district": null,
+      "is_national": true
+    },
+    "entities": {
+      "people": ["अमित शाह", "अखिलेश यादव", "सुप्रिया श्रीत", "सुप्रिया सुले", "सागरिका घोष"],
+      "organizations": ["BJP", "TMC", "Congress", "NCP"],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "01:19",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "नोएडा में श्रमिक विरोध प्रदर्शन: 300 गिरफ्तार, उच्च स्तरीय समिति गठित",
+    "summary": "नोएडा में वेतन वृद्धि की मांग पर हुए प्रदर्शन में हिंसा हुई, 300 लोगों को गिरफ्तार किया गया। मुख्यमंत्री योगी आदित्यनाथ ने श्रम विभाग के तहत उच्च स्तरीय समिति बनाकर मुद्दे सुलझाने का आदेश दिया।",
+    "metadata": {
+      "category": "Labor",
+      "tags": ["Noida", "Labor Protest", "Arrests", "Yogi Adityanath"],
+      "importance_score": 5,
+      "sentiment": "Negative"
+    },
+    "location": {
+      "state": "Uttar Pradesh",
+      "district": "Gautam Buddh Nagar",
+      "is_national": false
+    },
+    "entities": {
+      "people": ["यूपी के डीजीपी राजीव कृष्ण", "अखिलेश यादव"],
+      "organizations": ["Labor Department", "Police"],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "02:24",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "नौसेना कमांडरों का पहला अंतर्राष्ट्रीय सम्मेलन नई दिल्ली में आयोजित",
+    "summary": "2026 में नौसेना कमांडरों का पहला सम्मेलन नई दिल्ली में तीन दिवसों तक आयोजित होगा, जिसमें समुद्री हितों की रक्षा, विकास और ऑपरेशनल कंपैटिबिलिटी की समीक्षा की जाएगी।",
+    "metadata": {
+      "category": "Science",
+      "tags": ["Navy", "Conference", "Maritime Security"],
+      "importance_score": 4,
+      "sentiment": "Positive"
+    },
+    "location": {
+      "state": "Delhi",
+      "district": null,
+      "is_national": true
+    },
+    "entities": {
+      "people": [],
+      "organizations": ["Indian Navy"],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": ["Defense"]
+    },
+    "source_context": {
+      "original_timestamp": "03:30",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "इंदौर में अवैध कॉलोनी ध्वंस, 12 घर टूटे",
+    "summary": "इंदौर नगर निगम ने प्रतिबंधित आवासीय कॉलोनी में 12 बिना अनुमति के निर्मित घरों को बुलडोजर द्वारा ध्वस्त कर दिया, जिससे अनधिकृत निर्माण पर कड़ी कार्रवाई की सूचना मिली।",
+    "metadata": {
+      "category": "Infrastructure",
+      "tags": ["Indore", "Illegal Colonies", "Demolition"],
+      "importance_score": 3,
+      "sentiment": "Positive"
+    },
+    "location": {
+      "state": "Madhya Pradesh",
+      "district": "Indore",
+      "is_national": false
+    },
+    "entities": {
+      "people": [],
+      "organizations": ["Indore Municipal Corporation"],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "03:52",
+      "broadcast_date": "2026-04-14"
+    }
+  },
+  {
+    "headline": "ग्रेटर नोएडा में स्कूल बस दुर्घटना: 8 बच्चे घायल",
+    "summary": "ग्रेटर नोएडा में एक स्कूल बस में दुर्घटना हुई, जिसमें आठ बच्चे घायल हुए। स्थानीय आपातकालीन सेवाओं ने तुरंत मदद पहुंचाई और घटना की जांच शुरू हुई।",
+    "metadata": {
+      "category": "Crime",
+      "tags": ["Accident", "School Bus", "Injuries"],
+      "importance_score": 4,
+      "sentiment": "Negative"
+    },
+    "location": {
+      "state": "Uttar Pradesh",
+      "district": "Gautam Buddh Nagar",
+      "is_national": false
+    },
+    "entities": {
+      "people": [],
+      "organizations": [],
+      "monetary_values": null
+    },
+    "financials": {
+      "type": null,
+      "amount": null,
+      "currency": null,
+      "denomination": null,
+      "status": null,
+      "industry": []
+    },
+    "source_context": {
+      "original_timestamp": "04:16",
+      "broadcast_date": "2026-04-14"
+    }
+  }

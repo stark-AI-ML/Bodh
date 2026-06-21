@@ -1,0 +1,24 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "getNews" : node 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "bullmq": "^5.76.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "googleapis": "^172.0.0",
+    "mongoose": "^9.4.1",
+    "pg": "^8.20.0",
+    "playwright": "^1.59.1"
+  }
+}

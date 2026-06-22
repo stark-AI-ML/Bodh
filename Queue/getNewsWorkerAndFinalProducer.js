@@ -89,3 +89,5 @@ const channelQueueWorker = new Worker(
     concurrency: 1,
   }
 );
+
+export default channelQueueWorker;

@@ -56,6 +56,7 @@ const workerFinal = new Worker(
           // now i don't have to worry about transcript anymore should i delete it?
           // fuck perfectionism in me bacteria for my growth i will delete this after 10hr for any issue to arrive
           //fuuuuuuuck me
+
           // don't worry i have delted is_queued wasn't worth
 
           const transcriptId = job.data.id;
@@ -79,14 +80,14 @@ const workerFinal = new Worker(
   { connection }
 );
 
-console.log('working _ before completed');
-workerFinal.on('completed', (job, result) => {
-  console.log(`[Event] Job ${job.id} completed:`, result);
-});
-console.log('working _ after completed');
+// console.log('working _ before completed');
+// workerFinal.on('completed', (job, result) => {
+//   console.log(`[Event] Job ${job.id} completed:`, result);
+// });
+// console.log('working _ after completed');
 
-workerFinal.on('failed', (job, err) => {
-  console.error(`[Event] Job ${job.id} failed: ${err.message}`);
-});
+// workerFinal.on('failed', (job, err) => {
+//   console.error(`[Event] Job ${job.id} failed: ${err.message}`);
+// });
 
-// export default workerFinal;
+export default workerFinal;

@@ -88,10 +88,9 @@ schedulerWorker.on('failed', (job, err) => {
 
 async function start() {
   console.log('Starting Manager...');
-  // Clear any old jobs from previous tests
   await schedulerQueue.obliterate({ force: true });
 
   await schedulerQueue.add('dispatch-cycle', {}, { removeOnComplete: true });
 }
 
-start();
+export default start;

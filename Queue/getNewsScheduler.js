@@ -64,6 +64,9 @@ const schedulerWorker = new Worker(
     console.log(`[Scheduler] Added ${jobsToAdd.length} jobs to worker queue.`);
 
     const nextDelay = getNextDelay();
+    // /fix /test
+    // const nextDelay = 60 * 1000;
+
     console.log(
       `[Scheduler] Sleeping for ${(nextDelay / 1000).toFixed(1)} seconds...`
     );
@@ -75,7 +78,7 @@ const schedulerWorker = new Worker(
         delay: nextDelay,
         // delay: 30000,
         removeOnComplete: true,
-        removeOnFail: 10,
+        removeOnFail: 5,
       }
     );
   },

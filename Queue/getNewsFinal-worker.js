@@ -25,7 +25,7 @@ const workerFinal = new Worker(
     console.log(job.data);
     const newsJson = await getNewsJson(job.data.transcript);
 
-    console.log(newsJson);
+    // console.log(newsJson);
     // loading temp data remember you can only insert at a time so you directly pushed all newJson
     //  it was wrong in the first place
 
@@ -35,7 +35,7 @@ const workerFinal = new Worker(
     so take this whole json data and save each of the object
     */
 
-    // before new worker picked up  want to hydrate rate limit for ai
+    // /fix change back to 1 min
     await sleep(60000); // for one min
 
     // temp data

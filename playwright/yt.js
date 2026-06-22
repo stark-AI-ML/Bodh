@@ -3,71 +3,244 @@ import { firefox } from 'playwright';
 //  i have written update some where if you come here again please do....
 
 import pool from '../DB/postgres/dbConfig.js';
-// import news from '../tempNewsData.js';
+
+import news from '../tempNewsData.js';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getTranscript(videoUrl) {
-  const browser = await firefox.launch({
-    headless: false,
-  });
+// async function getTranscript(videoUrl) {
+//   const browser = await firefox.launch({
+//     headless: true,
+//   });
 
-  const context = await browser.newContext({
-    viewport: {
-      width: 1366 + Math.floor(Math.random() * 100),
-      height: 768 + Math.floor(Math.random() * 100),
-    },
+//   const context = await browser.newContext({
+//     viewport: {
+//       width: 1366 + Math.floor(Math.random() * 100),
+//       height: 768 + Math.floor(Math.random() * 100),
+//     },
+//     userAgent:
+//       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+//     locale: 'en-IN',
+//     timezoneId: 'Asia/Kolkata',
+//     headless: true,
+//     firefoxUserPrefs: {
+//       'dom.ipc.processCount': 1,
+//       'layers.acceleration.disabled': true,
+//       'gfx.webrender.force-disabled': true,
+//       'media.autoplay.default': 5,
+//       'media.block-autoplay-until-in-foreground': true,
+//     },
+//   });
+
+//   const page = await context.newPage();
+
+//   const randomNum = (min, max) =>
+//     Math.floor(Math.random() * (max - min + 1)) + min;
+
+//   const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+//   const humanScroll = async () => {
+//     const scrolls = randomNum(2, 5);
+//     for (let i = 0; i < scrolls; i++) {
+//       await page.mouse.wheel(0, randomNum(200, 800));
+//       await sleep(randomNum(500, 1500));
+//     }
+//   };
+
+//   async function tryUIExtraction() {
+//     await page.goto(videoUrl, { waitUntil: 'domcontentloaded' });
+//     await sleep(randomNum(2000, 4000));
+
+//     await humanScroll();
+//     await sleep(randomNum(800, 2000));
+
+//     // expand description
+//     const expandButton = page.locator('#expand').first();
+//     if (await expandButton.count()) {
+//       await expandButton.scrollIntoViewIfNeeded();
+//       await sleep(randomNum(500, 1200));
+//       await expandButton.hover();
+//       await sleep(randomNum(500, 1200));
+//       await expandButton.click();
+//     }
+
+//     await sleep(randomNum(1000, 2000));
+
+//     // show transcript
+//     const showTranscriptBtn = page.getByRole('button', {
+//       name: 'Show transcript',
+//     });
+
+//     if (!(await showTranscriptBtn.count())) {
+//       throw new Error('Transcript button not found');
+//     }
+
+//     await showTranscriptBtn.scrollIntoViewIfNeeded();
+//     await sleep(randomNum(500, 1200));
+//     await showTranscriptBtn.hover();
+//     await sleep(randomNum(500, 1200));
+//     await showTranscriptBtn.click();
+
+//     const transcriptContainer = page
+//       .locator('[target-id*="transcript"]')
+//       .first();
+
+//     await transcriptContainer.waitFor({
+//       state: 'visible',
+//       timeout: 10000,
+//     });
+
+//     await sleep(randomNum(1500, 2500));
+
+//     const data = await transcriptContainer.innerText();
+
+//     if (!data || data.length < 50) {
+//       throw new Error('Empty transcript');
+//     }
+
+//     return data;
+//   }
+
+//   try {
+//     // if transcript didn't load do it again
+//     for (let attempt = 0; attempt < 2; attempt++) {
+//       try {
+//         const result = await tryUIExtraction();
+//         console.log('get the transcript');
+//         return result;
+//       } catch (err) {
+//         console.log(`attempt ${attempt + 1} failed:`, err.message);
+//         await sleep(randomNum(2000, 4000));
+//       }
+//     }
+
+//     console.log('switching to fallback API...');
+
+//     // simulate human pause before fallback
+
+//     await sleep(randomNum(2000, 5000));
+
+//     const videoIdMatch = videoUrl.match(/v=([^&]+)/);
+//     if (!videoIdMatch) return null;
+
+//     const videoId = videoIdMatch[1];
+
+//     const headers = {
+//       'User-Agent':
+//         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+//       'Accept-Language': 'en-IN,en;q=0.9',
+//     };
+
+//     const html = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+//       headers,
+//     }).then((res) => res.text());
+
+//     const captionTracksMatch = html.match(/"captionTracks":(\[.*?\])/);
+
+//     if (!captionTracksMatch) {
+//       console.log('no captions found in fallback');
+//       // update the backend
+//       return null;
+//     }
+
+//     const captionTracks = JSON.parse(captionTracksMatch[1]);
+
+//     const track =
+//       captionTracks.find((t) => t.languageCode.startsWith('en')) ||
+//       captionTracks[0];
+
+//     await sleep(randomNum(1000, 2000));
+
+//     const transcriptXml = await fetch(track.baseUrl, { headers }).then((res) =>
+//       res.text()
+//     );
+
+//     const text = transcriptXml
+//       .replace(/<[^>]+>/g, '')
+//       .replace(/\s+/g, ' ')
+//       .trim();
+
+//     return text;
+//   } catch (error) {
+//     console.error('all methods failed:', error.message);
+//     // i need to update error log to send me message that news isn't being created
+//     return null;
+//   } finally {
+//     await browser.close();
+//   }
+// }
+
+let browser = null;
+let lastUsed = 0;
+
+const BROWSER_TTL = 15 * 60 * 1000; // 15 min
+// const BROWSER_TTL = 60 * 1000;
+// 🔥 Get or create browser
+async function getBrowser() {
+  const now = Date.now();
+
+  //fix to true
+  if (!browser) {
+    browser = await firefox.launch({ headless: true });
+  }
+
+  lastUsed = now;
+  return browser;
+}
+
+// delete browser
+setInterval(async () => {
+  if (!browser) return;
+
+  const now = Date.now();
+
+  if (now - lastUsed > BROWSER_TTL) {
+    console.log('Closing idle browser...');
+    await browser.close();
+    browser = null;
+  }
+}, 60 * 1000);
+
+export async function getTranscript(videoUrl) {
+  const browserInstance = await getBrowser();
+
+  const context = await browserInstance.newContext({
+    viewport: { width: 1366, height: 768 },
     userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0',
     locale: 'en-IN',
     timezoneId: 'Asia/Kolkata',
-    headless: false,
     firefoxUserPrefs: {
       'dom.ipc.processCount': 1,
-      'layers.acceleration.disabled': true,
-      'gfx.webrender.force-disabled': true,
       'media.autoplay.default': 5,
-      'media.block-autoplay-until-in-foreground': true,
     },
   });
 
   const page = await context.newPage();
 
-  const randomNum = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
+  // Block heavy resources
+  await page.route('**/*', (route) => {
+    const type = route.request().resourceType();
+    if (['image', 'font', 'media'].includes(type)) {
+      return route.abort();
+    }
+    route.continue();
+  });
 
   const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
-  const humanScroll = async () => {
-    const scrolls = randomNum(2, 5);
-    for (let i = 0; i < scrolls; i++) {
-      await page.mouse.wheel(0, randomNum(200, 800));
-      await sleep(randomNum(500, 1500));
-    }
-  };
-
   async function tryUIExtraction() {
     await page.goto(videoUrl, { waitUntil: 'domcontentloaded' });
-    await sleep(randomNum(2000, 4000));
 
-    await humanScroll();
-    await sleep(randomNum(800, 2000));
+    await sleep(1500);
 
-    // expand description
     const expandButton = page.locator('#expand').first();
-    if (await expandButton.count()) {
-      await expandButton.scrollIntoViewIfNeeded();
-      await sleep(randomNum(500, 1200));
-      await expandButton.hover();
-      await sleep(randomNum(500, 1200));
-      await expandButton.click();
+    if (await expandButton.isVisible().catch(() => false)) {
+      await expandButton.click({ timeout: 3000 }).catch(() => {});
     }
 
-    await sleep(randomNum(1000, 2000));
-
-    // show transcript
     const showTranscriptBtn = page.getByRole('button', {
       name: 'Show transcript',
     });
@@ -77,7 +250,6 @@ async function getTranscript(videoUrl) {
     }
 
     await showTranscriptBtn.scrollIntoViewIfNeeded();
-    await sleep(randomNum(500, 1200));
     await showTranscriptBtn.hover();
     await sleep(randomNum(500, 1200));
     await showTranscriptBtn.click();
@@ -85,6 +257,11 @@ async function getTranscript(videoUrl) {
     const transcriptContainer = page
       .locator('[target-id*="transcript"]')
       .first();
+
+    await transcriptContainer.waitFor({
+      state: 'visible',
+      timeout: 8000,
+    });
 
     await transcriptContainer.waitFor({
       state: 'visible',
@@ -103,21 +280,17 @@ async function getTranscript(videoUrl) {
   }
 
   try {
-    // if transcript didn't load do it again
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const result = await tryUIExtraction();
         console.log('get the transcript');
         return result;
       } catch (err) {
-        console.log(`attempt ${attempt + 1} failed:`, err.message);
+        console.warn(`Attempt ${attempt + 1} failed:`, err.message);
         await sleep(randomNum(2000, 4000));
       }
     }
 
-    console.log('switching to fallback API...');
-
-    // simulate human pause before fallback
     await sleep(randomNum(2000, 5000));
 
     const videoIdMatch = videoUrl.match(/v=([^&]+)/);
@@ -127,7 +300,7 @@ async function getTranscript(videoUrl) {
 
     const headers = {
       'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0',
       'Accept-Language': 'en-IN,en;q=0.9',
     };
 
@@ -150,7 +323,6 @@ async function getTranscript(videoUrl) {
       captionTracks[0];
 
     await sleep(randomNum(1000, 2000));
-
     const transcriptXml = await fetch(track.baseUrl, { headers }).then((res) =>
       res.text()
     );
@@ -161,14 +333,19 @@ async function getTranscript(videoUrl) {
       .trim();
 
     return text;
-  } catch (error) {
-    console.error('all methods failed:', error.message);
-    // i need to update error log to send me message that news isn't being created
+  } catch (err) {
     return null;
   } finally {
-    await browser.close();
+    await context.close();
   }
 }
+
+/* test */
+
+// export async function getTranscript() {
+//   await sleep(10000);
+//   return news;
+// }
 
 function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -184,7 +361,7 @@ async function getTranscripts(videoList) {
 
       transcripts.push(transcript);
       console.log(transcript);
-      sleep(randomNum(7000, 12000));
+      await sleep(randomNum(7000, 12000));
     } catch (error) {
       console.error(error);
     }
@@ -235,6 +412,9 @@ async function saveTranscript(
 export default saveTranscript;
 
 // -----------------------testingg---------------
+// const res = await getTranscript('https://www.youtube.com/watch?v=jevDvFTrxNg');
+
+// console.log(res);
 // const video = [
 //   {
 //     videoId: "qSbiVdmSQoE",

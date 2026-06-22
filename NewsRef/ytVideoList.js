@@ -5,6 +5,36 @@ import dotenv from 'dotenv';
 
 dotenv.configDotenv();
 
+/* 
+after almost 3-4 weeks i revisted this  even i get overwhelmed how much perfection i tried here 
+      yeah did take the help of ai in iso, but still all this algos were mine so 
+
+      -- if you are seeing this don't be overwhelmed it is just few wrapper i have created to filter
+      aggressively... based on the time freshenes hours and all 
+      see as i have channel config all i did is create a good architecture around : 
+
+      have config : ->>> then use that config to filter things out : 
+
+      eg : regex, time, duration 
+
+
+what google api will return : but not everything is relevance : so ... need my config 
+  [
+  {
+    videoId: 'GJ7DuXR_zuA',
+    title: 'Stocks In news | Top 5 Stocks to Focus On Today– 25th May 2026 | First Trade | Intraday Stocks',
+    publishedAt: '2026-05-26T03:38:25Z',
+    thumbnail: 'https://i.ytimg.com/vi/GJ7DuXR_zuA/hqdefault.jpg',
+    duration: 'PT5M54S',
+    url: 'https://www.youtube.com/watch?v=GJ7DuXR_zuA'
+  }
+ more ..... like this 
+]
+
+
+
+*/
+
 class VIDEO_LIST {
   #ChannelConfig;
   #API_KEY;
@@ -14,21 +44,24 @@ class VIDEO_LIST {
     this.#ChannelConfig = ChannelConfig;
   }
 
-  #stringDurationToObj(iso) {
+  #stringDurationToObj(strDuration) {
+    // duration: 'PT17M16S'  to {hours: 3, minutes: 3, seconds:3} -->
+    // simple logic just playing with ascii value like we do all the time in cpp
+
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
 
     let num = 0;
 
-    for (let i = 0; i < iso.length; i++) {
-      const code = iso.charCodeAt(i) - 48;
+    for (let i = 0; i < strDuration.length; i++) {
+      const code = strDuration.charCodeAt(i) - 48;
 
       // digit
       if (code >= 0 && code <= 9) {
         num = num * 10 + code;
       } else {
-        const ch = iso[i];
+        const ch = strDuration[i];
 
         if (ch === 'H') {
           hours = num;
@@ -52,15 +85,15 @@ class VIDEO_LIST {
       totalMinutes: hours * 60 + minutes + seconds / 60,
     };
   }
-
   #matchesPattern(text) {
     return this.#ChannelConfig.regex.some((regexObj) => {
       let regex;
+
       // if it is directly regex then
       if (regexObj instanceof RegExp) {
         regex = regexObj;
       } else if (regexObj && typeof regexObj.pattern === 'string') {
-        // if passed the object like you stored
+        // if passed the object like we stored earlier
         try {
           regex = new RegExp(regexObj.pattern, regexObj.flags || '');
         } catch (err) {
@@ -128,7 +161,6 @@ class VIDEO_LIST {
     });
 
     try {
-      // STEP 1
       const channelResponse = await youtube.channels.list({
         part: 'contentDetails',
         id: CHANNEL_ID,
@@ -181,6 +213,7 @@ class VIDEO_LIST {
               url: `https://www.youtube.com/watch?v=${videoId}`,
             };
           })
+
           .filter((item) => {
             if (!item.duration) return false;
             const duration = this.#stringDurationToObj(item.duration);
@@ -199,7 +232,6 @@ class VIDEO_LIST {
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
       );
 
-      // FINAL LIMIT
       return sortedMature;
     } catch (err) {
       console.error('Error:', err.message);
@@ -215,11 +247,11 @@ function sleep(ms) {
   });
 }
 
-const key = process.env.GEMINI_KEY_YT;
-
 export default VIDEO_LIST;
 
-// --------------------------------------------------------------------------
+// test --------------------------------------------------------------------------
+
+// const key = process.env.GEMINI_KEY_YT;
 
 // const n = new VIDEO_LIST(ChannelsConfig[2], key);
 // const data = await n.fetchNewsUrl();

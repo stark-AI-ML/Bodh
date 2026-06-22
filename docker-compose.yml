@@ -1,0 +1,31 @@
+services:
+  bodhscaper: 
+    build : .
+    container_name: BodhScraper-container_name
+
+    environment: 
+      REDIS_URI: ${REDIS_URI}
+      DB_HOST : db
+      DB_PASS : ${DB_PASS}
+      DB_USER: ${DB_USER}
+      DB_NAME : ${DB_NAME}
+    
+    command: ["node", "scraper.js"]
+    restart: always
+
+    networks:
+      - shared_private_net
+
+networks:
+  shared_private_net:
+    external: true
+
+
+    
+
+
+
+
+
+
+

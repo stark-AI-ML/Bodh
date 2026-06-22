@@ -2,8 +2,8 @@ import { firefox } from 'playwright';
 
 //  i have written update some where if you come here again please do....
 
-import pool from './DB/postgres/dbConfig.js';
-import news from './tempNewsData.js';
+import pool from '../DB/postgres/dbConfig.js';
+// import news from '../tempNewsData.js';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

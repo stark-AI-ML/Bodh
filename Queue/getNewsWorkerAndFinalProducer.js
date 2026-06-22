@@ -11,6 +11,10 @@ import pool from '../DB/postgres/dbConfig.js';
 
 dotenv.configDotenv();
 
+const finalNewsQueue = new Queue('final-save', {
+  connection,
+});
+
 const channelQueueWorker = new Worker(
   'channels-queue',
   async (job) => {
@@ -41,22 +45,22 @@ const channelQueueWorker = new Worker(
     // producing the ai request queue for job should i do this without
     //  storing or not there are some pros and cons like with db reliability maybe?
 
-    const finalNewsQueue = new Queue('final-save', {
-      connection,
-    });
-
     const Query = 'SELECT * FROM channel_transcripts WHERE is_used= FALSE';
 
     const result = await pool.query(Query);
 
     console.log(result.rows);
     const length = result.rows.length;
+
     const successful = [];
+
     try {
       for (let i = 0; i < length; i++) {
+        const row = result.rows[i];
         //fix
         // const row = result.rows[i];
-        await finalNewsQueue.add('get-transcript-json', result.rows[i], {
+        await finalNewsQueue.add('get-transcript-json', row, {
+          jobId: `transcript-${row.id}`,
           removeOnComplete: true,
           removeOnFail: 3,
           attempts: 3,
@@ -74,13 +78,23 @@ const channelQueueWorker = new Worker(
       console.error('Error adding jobs to the queue:', error);
     }
 
-    // setting flag so next job won't hit the same transcript again and again
-    // if (successful.length > 0) {
+    // setting flag is_used to true so next job won't hit the same transcript again and again
+
+    const ids = successful.map((row) => row.id);
+
+    if (ids.length > 0) {
+      await pool.query(
+        'UPDATE channel_transcripts SET is_used = TRUE WHERE id = ANY($1)',
+        [ids]
+      );
+    }
+
+    // for (let i = 0; i < successful.length; i++) {
     //   await pool.query(
-    //     'UPDATE channel_transcripts SET is_queued = TRUE WHERE id = ANY($1)',
+    //     'UPDATE channel_transcripts SET is_used = TRUE WHERE id = ANY($1)',
     //     [successful[i]]
     //   );
-    // } // not needed i was doing the overkill
+    // }
 
     return { id: job.data.id, status: 'success' };
   },

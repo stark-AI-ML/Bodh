@@ -61,10 +61,10 @@ const workerFinal = new Worker(
 
           const transcriptId = job.data.id;
 
-          const query = `UPDATE channel_transcripts SET is_used = TRUE
-                        WHERE id = $1`;
+          // const query = `UPDATE channel_transcripts SET is_used = TRUE
+          //               WHERE id = $1`;
 
-          await pool.query(query, [transcriptId]);
+          // await pool.query(query, [transcriptId]);
         } catch (error) {
           attempt++;
           console.error('Insert failed:', error);

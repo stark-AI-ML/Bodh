@@ -72,7 +72,7 @@ const workerFinal = new Worker(
             throw new Error(`Failed after ${attempt} attempts`);
           }
 
-          await sleep(attempt * 1000);
+          await sleep(attempt * 5000);
         }
       }
     }

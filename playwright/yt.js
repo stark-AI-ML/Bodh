@@ -177,7 +177,6 @@ let lastUsed = 0;
 
 const BROWSER_TTL = 15 * 60 * 1000; // 15 min
 // const BROWSER_TTL = 60 * 1000;
-// 🔥 Get or create browser
 async function getBrowser() {
   const now = Date.now();
 
@@ -351,8 +350,12 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// get transcripts for all list created by the channel queue well reduced to 3 i am optimising
+// as it does break yt rate limit it blocked me today so that's a panic situation for me
+// the reason why  i am writing this comment
+
 async function getTranscripts(videoList) {
-  const length = videoList.length < 4 ? videoList.length : 4;
+  const length = videoList.length < 3 ? videoList.length : 3;
   const transcripts = [];
 
   for (let i = 0; i < length; i++) {
@@ -361,7 +364,7 @@ async function getTranscripts(videoList) {
 
       transcripts.push(transcript);
       console.log(transcript);
-      await sleep(randomNum(7000, 12000));
+      await sleep(randomNum(15000, 22000));
     } catch (error) {
       console.error(error);
     }

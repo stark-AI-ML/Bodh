@@ -7,7 +7,8 @@ dotenv.configDotenv();
 
 /* 
 after almost 3-4 weeks i revisted this  even i get overwhelmed how much perfection i tried here 
-      yeah did take the help of ai in iso, but still all this algos were mine so 
+      yeah did take the help of ai in iso, but still all this algos were mine 
+      so i shouldn't be burning out during debug but... i did so : 
 
       -- if you are seeing this don't be overwhelmed it is just few wrapper i have created to filter
       aggressively... based on the time freshenes hours and all 
@@ -143,7 +144,7 @@ class VIDEO_LIST {
           return diff.hours <= freshnessHours;
         })
 
-        // sorting latest first
+        // sorting latest first  /fix - try do that for duration baseed
         .sort(
           (a, b) =>
             new Date(b.publishedAt).getTime() -
@@ -173,11 +174,11 @@ class VIDEO_LIST {
 
       let collectedVideos = [];
 
-      while (collectedVideos.length < 21) {
+      while (collectedVideos.length < 19) {
         const searchResponse = await youtube.search.list({
           part: 'snippet',
           channelId: CHANNEL_ID,
-          maxResults: 50,
+          maxResults: 40,
           order: 'date',
           type: 'video',
           pageToken: nextPageToken,

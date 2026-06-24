@@ -3,7 +3,10 @@ import channelQueueWorker from './Queue/getNewsWorkerAndFinalProducer.js';
 import start from './Queue/getNewsScheduler.js';
 
 // start scheduler
+
 await start();
+
+
 
 // events
 workerFinal.on('completed', (job) => {

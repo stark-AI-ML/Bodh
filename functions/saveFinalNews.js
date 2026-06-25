@@ -1,10 +1,10 @@
-import pool from "../DB/postgres/dbConfig.js";
+import pool from '../DB/postgres/dbConfig.js';
 
 async function insertNews(news) {
   const client = await pool.connect();
 
   try {
-    await client.query("BEGIN");
+    await client.query('BEGIN');
     let stateId = null;
     let districtId = null;
 
@@ -17,7 +17,7 @@ async function insertNews(news) {
         DO UPDATE SET name = EXCLUDED.name
         RETURNING id
         `,
-        [news.location.state],
+        [news.location.state]
       );
 
       stateId = stateRes.rows[0].id;
@@ -32,14 +32,14 @@ async function insertNews(news) {
         DO UPDATE SET name = EXCLUDED.name
         RETURNING id
         `,
-        [stateId, news.location.district],
+        [stateId, news.location.district]
       );
 
       districtId = districtRes.rows[0].id;
     }
 
     const broadcastDate = new Date();
-    const dateOnly = broadcastDate.toISOString().split("T")[0];
+    const dateOnly = broadcastDate.toISOString().split('T')[0];
 
     const res = await client.query(
       `
@@ -84,8 +84,8 @@ async function insertNews(news) {
         news.impact_scope,
         news.importance_score,
         news.sentiment,
-        news.crime_severity || "NONE",
-        news.emergency_type || "NONE",
+        news.crime_severity || 'NONE',
+        news.emergency_type || 'NONE',
         news.location?.is_national ?? false,
         stateId,
         districtId,
@@ -99,15 +99,15 @@ async function insertNews(news) {
         news.financials?.status || null,
         JSON.stringify(news.financials?.industry || []),
         dateOnly,
-      ],
+      ]
     );
 
-    await client.query("COMMIT");
+    await client.query('COMMIT');
 
-    console.log("Inserted news ID:", res.rows[0].id);
+    console.log('Inserted news ID:', res.rows[0].id);
   } catch (error) {
-    await client.query("ROLLBACK");
-    console.error("Error inserting news item:", error);
+    await client.query('ROLLBACK');
+    console.error('Error inserting news item:', error);
   } finally {
     client.release();
   }

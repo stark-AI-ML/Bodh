@@ -78,7 +78,7 @@ const schedulerWorker = new Worker(
         delay: nextDelay,
         // delay: 30000,
         removeOnComplete: true,
-        removeOnFail: 5,
+        removeOnFail: { age: 40 * 60 },
       }
     );
   },

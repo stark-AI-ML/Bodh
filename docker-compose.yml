@@ -1,7 +1,7 @@
 services:
   bodhscaper: 
     build : .
-    container_name: BodhScraper-container_name
+    container_name: bodh-scraper
 
     environment: 
       REDIS_URI: ${REDIS_URI}
@@ -9,6 +9,10 @@ services:
       DB_PASS : ${DB_PASS}
       DB_USER: ${DB_USER}
       DB_NAME : ${DB_NAME}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_DB: ${REDIS_DB}
+
     
     command: ["node", "scraper.js"]
     restart: always

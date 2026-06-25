@@ -6,8 +6,6 @@ import start from './Queue/getNewsScheduler.js';
 
 await start();
 
-
-
 // events
 workerFinal.on('completed', (job) => {
   console.log(`[Final] Job ${job.id} completed`);

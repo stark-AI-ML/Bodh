@@ -93,8 +93,8 @@ const channelQueueWorker = new Worker(
         await finalNewsQueue.add('get-transcript-json', row, {
           jobId: `transcript-${row.id}`,
           removeOnComplete: true,
-          removeOnFail: 3,
-          attempts: 3,
+          removeOnFail: { age: 40 * 60 },
+          attempts: 2,
           backoff: {
             type: 'fixed',
             delay: 10000,

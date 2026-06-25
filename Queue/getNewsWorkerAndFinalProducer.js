@@ -49,19 +49,28 @@ const finalNewsQueue = new Queue('final-save', {
 const channelQueueWorker = new Worker(
   'channels-queue',
   async (job) => {
-    console.log('jobData', job.data);
+    console.log('[Channel] Processing:', job.data.channelName);
 
     const key = process.env.GEMINI_KEY_YT;
 
     const getList = new VIDEO_LIST(job.data, key);
+    console.log(getList);
 
     const videoList = await getList.fetchNewsUrl();
 
-    if (videoList == null) {
+    //remove log /fix
+    console.log(videoList);
+
+    if (!videoList || videoList.length === 0) {
       return 'NO-LIST found graceful return  so unusual playwright run';
     }
 
-    console.log(videoList);
+    console.log(
+      '[Channel]',
+      videoList.length,
+      'videos matched for',
+      job.data.channelName
+    );
 
     await saveTranscript(
       job.data.channelId,
@@ -71,25 +80,23 @@ const channelQueueWorker = new Worker(
       videoList
     );
 
-    console.log('sucessfull');
+    console.log('[Channel] Transcripts scraped for', job.data.channelName);
 
-    // producing the ai request queue for job should i do this without
-    //  storing or not there are some pros and cons like with db reliability maybe?
+    // Atomically grab and mark unused transcripts — prevents race condition
+    // where multiple channel workers could grab the same transcripts
+    const result = await pool.query(
+      'UPDATE channel_transcripts SET is_used = TRUE WHERE is_used = FALSE RETURNING *'
+    );
 
-    const Query = 'SELECT * FROM channel_transcripts WHERE is_used= FALSE';
+    console.log(`[Channel] ${result.rows.length} unused transcripts claimed`);
 
-    const result = await pool.query(Query);
-
-    console.log(result.rows);
-    const length = result.rows.length;
-
-    const successful = [];
+    if (result.rows.length === 0) {
+      return { id: job.data.id, status: 'success', transcripts: 0 };
+    }
 
     try {
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < result.rows.length; i++) {
         const row = result.rows[i];
-        //fix
-        // const row = result.rows[i];
         await finalNewsQueue.add('get-transcript-json', row, {
           jobId: `transcript-${row.id}`,
           removeOnComplete: true,
@@ -100,32 +107,14 @@ const channelQueueWorker = new Worker(
             delay: 10000,
           },
         });
-        successful.push(result.rows[i]);
-
-        console.log(`Job added: ${i}`);
+        console.log(
+          `[Channel] Queued transcript ${row.id} (${i + 1}/${result.rows.length})`
+        );
       }
-      console.log('All jobs successfully added to the queue.');
+      console.log('[Channel] All transcript jobs queued');
     } catch (error) {
-      console.error('Error adding jobs to the queue:', error);
+      console.error('[Channel] Error queuing jobs:', error);
     }
-
-    // setting flag is_used to true so next job won't hit the same transcript again and again
-
-    const ids = successful.map((row) => row.id);
-
-    if (ids.length > 0) {
-      await pool.query(
-        'UPDATE channel_transcripts SET is_used = TRUE WHERE id = ANY($1)',
-        [ids]
-      );
-    }
-
-    // for (let i = 0; i < successful.length; i++) {
-    //   await pool.query(
-    //     'UPDATE channel_transcripts SET is_used = TRUE WHERE id = ANY($1)',
-    //     [successful[i]]
-    //   );
-    // }
 
     return { id: job.data.id, status: 'success' };
   },

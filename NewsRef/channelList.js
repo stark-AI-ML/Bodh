@@ -30,7 +30,7 @@ const ChannelsConfig = [
 
     regex: [
       { pattern: '^Top\\s+News:\\s*.+$', flags: 'u' },
-
+      // { pattern: 's+' },
       {
         pattern: '.*\\b(?:Top\\s+\\d+\\s+Stocks|Trending\\s+Stocks)(?:\\b.*)?',
         flags: 'i',

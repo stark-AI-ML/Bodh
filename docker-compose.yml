@@ -8,10 +8,14 @@ services:
       DB_HOST : db
       DB_PASS : ${DB_PASS}
       DB_USER: ${DB_USER}
+
+      DATABASE_URL: ${DATABASE_URL}
       DB_NAME : ${DB_NAME}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_DB: ${REDIS_DB}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_KEY_YT: ${GEMINI_KEY_YT}
 
     
     command: ["node", "scraper.js"]

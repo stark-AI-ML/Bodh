@@ -4,7 +4,7 @@ import { firefox } from 'playwright';
 
 import pool from '../DB/postgres/dbConfig.js';
 
-import news from '../tempNewsData.js';
+// import news from '../tempNewsData.js';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -24,7 +24,7 @@ async function getBrowser() {
 
   //fix to true
   if (!browser) {
-    browser = await firefox.launch({ headless: true });
+    browser = await firefox.launch({ headless: false });
   }
 
   lastUsed = now;
@@ -32,7 +32,7 @@ async function getBrowser() {
 }
 
 // delete browser
-setInterval(async () => {
+const browserCleanupInterval = setInterval(async () => {
   if (!browser) return;
 
   const now = Date.now();
@@ -75,7 +75,7 @@ async function getTranscript(videoUrl) {
   async function tryUIExtraction() {
     await page.goto(videoUrl, { waitUntil: 'domcontentloaded' });
 
-    await sleep(1500);
+    await sleep(randomNum(5000, 10000));
 
     const expandButton = page.locator('#expand').first();
     if (await expandButton.isVisible().catch(() => false)) {
@@ -89,7 +89,7 @@ async function getTranscript(videoUrl) {
     if (!(await showTranscriptBtn.count())) {
       throw new Error('Transcript button not found');
     }
-    await sleep(randomNum(5000, 10000));
+    sleep(randomNum(1000, 3000));
     await showTranscriptBtn.scrollIntoViewIfNeeded();
     await showTranscriptBtn.hover();
 
@@ -201,7 +201,9 @@ async function getTranscripts(videoList) {
       const transcript = await getTranscript(videoList[i].url);
 
       transcripts.push(transcript);
-      console.log(transcript);
+      console.log(
+        `[Scraper] Transcript ${i + 1}/${length}: ${transcript ? `${transcript.length} chars — "${transcript.substring(0, 60)}..."` : 'FAILED'}`
+      );
       await sleep(randomNum(15000, 22000));
     } catch (error) {
       console.error(error);
@@ -243,14 +245,25 @@ async function saveTranscript(
       isUsed,
     ]);
     results.push(res.rows[0]);
-    console.log('pushed 1 data', res.rows);
+    console.log(
+      `[Scraper] Saved transcript ${results.length} to DB (id: ${res.rows[0]?.id})`
+    );
   }
 
-  console.log(results);
+  console.log(`[Scraper] ${results.length} transcripts saved to DB`);
   return results;
 }
 
 export default saveTranscript;
+
+export async function cleanupBrowser() {
+  clearInterval(browserCleanupInterval);
+  if (browser) {
+    console.log('[Scraper] Closing browser on shutdown...');
+    await browser.close().catch(() => {});
+    browser = null;
+  }
+}
 
 // -----------------------testingg---------------
 // const res = await getTranscript('https://www.youtube.com/watch?v=jevDvFTrxNg');

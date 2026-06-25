@@ -46,6 +46,7 @@ function getNextDelay() {
 
 const schedulerQueue = new Queue('scheduler-queue', { connection });
 const channelsQueue = new Queue('channels-queue', { connection });
+const finalSaveQueue = new Queue('final-save', { connection });
 
 const schedulerWorker = new Worker(
   'scheduler-queue',
@@ -58,6 +59,8 @@ const schedulerWorker = new Worker(
       data: channel,
       opts: { removeOnComplete: true },
     }));
+
+    // console.log(jobsToAdd);
 
     await channelsQueue.addBulk(jobsToAdd);
 
@@ -92,6 +95,8 @@ schedulerWorker.on('failed', (job, err) => {
 async function start() {
   console.log('Starting Manager...');
   await schedulerQueue.obliterate({ force: true });
+  await channelsQueue.drain();
+  await finalSaveQueue.drain();
 
   await schedulerQueue.add('dispatch-cycle', {}, { removeOnComplete: true });
 }

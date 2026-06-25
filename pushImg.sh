@@ -9,7 +9,7 @@ img="rudreshsingh01/bodhscraper:$version"
 
 docker build -t "$img" .
 
-docker tag "$img" "rudreshsingh01/bodhapi:latest"
+docker tag "$img" "rudreshsingh01/bodhscraper:latest"
 
 docker push "$img"
-docker push "rudreshsingh01/bodhapi:latest"
+docker push "rudreshsingh01/bodhscraper:latest"

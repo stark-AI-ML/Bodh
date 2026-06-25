@@ -1,12 +1,11 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-import news from '../tempNewsData.js';
 import newsPrompt from './prompt.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.GEMINI_API_KEY);
+// console.log(process.env.GEMINI_API_KEY);
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 

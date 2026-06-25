@@ -1,6 +1,7 @@
 import workerFinal from './Queue/getNewsFinal-worker.js';
 import channelQueueWorker from './Queue/getNewsWorkerAndFinalProducer.js';
 import start from './Queue/getNewsScheduler.js';
+import { cleanupBrowser } from './playwright/yt.js';
 
 // start scheduler
 
@@ -27,6 +28,7 @@ const shutdown = async () => {
 
   await workerFinal.close();
   await channelQueueWorker.close();
+  await cleanupBrowser();
 
   process.exit(0);
 };

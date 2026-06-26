@@ -24,7 +24,7 @@ async function getBrowser() {
 
   //fix to true
   if (!browser) {
-    browser = await firefox.launch({ headless: false });
+    browser = await firefox.launch({ headless: true });
   }
 
   lastUsed = now;

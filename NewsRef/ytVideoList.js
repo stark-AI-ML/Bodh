@@ -183,7 +183,7 @@ class VIDEO_LIST {
           type: 'video',
           pageToken: nextPageToken,
         });
-        console.log(searchResponse);
+        // console.log(searchResponse);
 
         const searchItems = searchResponse.data.items;
         nextPageToken = searchResponse.data.nextPageToken;
@@ -253,11 +253,11 @@ export default VIDEO_LIST;
 
 // test --------------------------------------------------------------------------
 
-const key = process.env.GEMINI_KEY_YT;
+// const key = process.env.GEMINI_KEY_YT;
 
-const n = new VIDEO_LIST(ChannelsConfig[1], key);
-const data = await n.fetchNewsUrl();
-console.log(data);
+// const n = new VIDEO_LIST(ChannelsConfig[1], key);
+// const data = await n.fetchNewsUrl();
+// console.log(data);
 
 // I will use BullMq for this so no need to get all channel list at once cuz transript thing also has to be done
 // async function getAllList() {

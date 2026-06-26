@@ -54,12 +54,12 @@ const channelQueueWorker = new Worker(
     const key = process.env.GEMINI_KEY_YT;
 
     const getList = new VIDEO_LIST(job.data, key);
-    console.log(getList);
+    // console.log(getList);
 
     const videoList = await getList.fetchNewsUrl();
 
     //remove log /fix
-    console.log(videoList);
+    // console.log(videoList);
 
     if (!videoList || videoList.length === 0) {
       return 'NO-LIST found graceful return  so unusual playwright run';

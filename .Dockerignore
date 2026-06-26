@@ -12,4 +12,7 @@ del/
 .git/
 
 
-save
+tempNewsData.js
+testYTOPT.js
+testYTtranscript.js
+updates.md

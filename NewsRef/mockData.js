@@ -1,369 +1,369 @@
-const data = [
-  {
-    headline: "US-Iran Naval Conflict Triggers Global Crude Oil Price Spike",
-    summary:
-      "US forces reportedly sank an Iranian boat force, causing Brent crude prices to rise by $1 to $97.5 per barrel. This geopolitical escalation in the Strait of Hormuz is expected to impact the Indian Rupee and market volatility.",
-    category: "Geopolitics",
-    impact_scope: "International",
-    crime_severity: "NONE",
-    emergency_type: "WAR_CONFLICT",
-    importance_score: 8,
-    sentiment: "Negative",
-    tags: [
-      "Crude Oil",
-      "US-Iran Tension",
-      "Strait of Hormuz",
-      "Energy Security",
-    ],
-    location: {
-      state: null,
-      district: null,
-      is_national: false,
-    },
-    entities: {
-      people: [],
-      organizations: ["US Navy", "Iranian Boat Force"],
-      monetary_values: ["$97.5"],
-    },
-    financials: null,
-    source_context: {
-      original_timestamp: "00:40",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "Finance Minister Signals Potential Revisions to LTCG and STCG Tax Structures",
-    summary:
-      "Union Finance Minister Nirmala Sitharaman expressed openness to investor suggestions regarding Long-Term and Short-Term Capital Gains taxes during a meeting in Mumbai. This move is aimed at addressing FII concerns and stabilizing the Rupee.",
-    category: "Politics",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 9,
-    sentiment: "Positive",
-    tags: ["LTCG", "STCG", "Tax Reform", "FII", "Nirmala Sitharaman"],
-    location: {
-      state: "Maharashtra",
-      district: "Mumbai",
-      is_national: true,
-    },
-    entities: {
-      people: ["Nirmala Sitharaman"],
-      organizations: ["Ministry of Finance"],
-      monetary_values: [],
-    },
-    financials: {
-      type: "Budget Allocation",
-      amount: null,
-      currency: "INR",
-      denomination: null,
-      status: "Announced",
-      industry: ["Capital Markets", "Finance"],
-    },
-    source_context: {
-      original_timestamp: "02:06",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "IGL Hikes CNG Prices in NCR by ₹2 per KG; Fourth Increase in 12 Days",
-    summary:
-      "Indraprastha Gas Limited (IGL) has announced a ₹2 per kg hike in CNG prices for the National Capital Region. This brings the total price increase to ₹6 per kg within the last 12 days, putting pressure on commuters.",
-    category: "Economy",
-    impact_scope: "District",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 6,
-    sentiment: "Negative",
-    tags: ["CNG Price Hike", "IGL", "NCR", "Inflation"],
-    location: {
-      state: "Delhi",
-      district: "NCR",
-      is_national: false,
-    },
-    entities: {
-      people: [],
-      organizations: ["Indraprastha Gas Limited"],
-      monetary_values: ["₹2 per kg", "₹6 per kg"],
-    },
-    financials: null,
-    source_context: {
-      original_timestamp: "10:50",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "Tata Sons Board to Review Strategic Turnaround Plans for Air India and Tata Digital",
-    summary:
-      "Chairman N. Chandrasekaran will present turnaround strategies for Air India, Tata Digital, and Tata Electronics to the Tata Sons board. The meeting may also touch upon the highly anticipated Tata Sons listing.",
-    category: "Infrastructure",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 7,
-    sentiment: "Neutral",
-    tags: [
-      "Tata Sons",
-      "Air India",
-      "Tata Digital",
-      "IPO",
-      "N. Chandrasekaran",
-    ],
-    location: {
-      state: "Maharashtra",
-      district: "Mumbai",
-      is_national: true,
-    },
-    entities: {
-      people: ["N. Chandrasekaran"],
-      organizations: [
-        "Tata Sons",
-        "Air India",
-        "Tata Digital",
-        "Tata Electronics",
-        "Tata Chemicals",
-      ],
-      monetary_values: [],
-    },
-    financials: {
-      type: "Capex",
-      amount: null,
-      currency: null,
-      denomination: null,
-      status: "Announced",
-      industry: ["Aviation", "Technology", "Electronics"],
-    },
-    source_context: {
-      original_timestamp: "09:47",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "Institutional Giants Absorb Large Stakes in Premier Energies and Global Health",
-    summary:
-      "Promoters of Premier Energies and Global Health (Medanta) sold significant equity stakes, which were bought by major investors including Nomura, HDFC Mutual Fund, and Abu Dhabi Investment Authority. Premier Energies saw 2.4 crore shares traded at ₹955.",
-    category: "Economy",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 7,
-    sentiment: "Positive",
-    tags: [
-      "Block Deal",
-      "Premier Energies",
-      "Medanta",
-      "Institutional Investment",
-    ],
-    location: {
-      state: null,
-      district: null,
-      is_national: true,
-    },
-    entities: {
-      people: ["Sunil Sachdeva"],
-      organizations: [
-        "Premier Energies",
-        "Global Health",
-        "Nomura",
-        "HDFC Mutual Fund",
-        "Abu Dhabi Investment Authority",
-        "Quant Mutual Fund",
-      ],
-      monetary_values: ["₹955", "₹1225"],
-    },
-    financials: {
-      type: "FDI",
-      amount: null,
-      currency: "INR",
-      denomination: null,
-      status: "Completed",
-      industry: ["Renewable Energy", "Healthcare"],
-    },
-    source_context: {
-      original_timestamp: "04:02",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "RVNL and CONCOR Report Weak Q3 Earnings Amid Execution Challenges",
-    summary:
-      "Rail Vikas Nigam Limited (RVNL) reported a 58% drop in profit despite a growing order book, while Container Corporation (CONCOR) saw a 12% decline in profit. Both companies struggled with execution and margin contraction.",
-    category: "Economy",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 7,
-    sentiment: "Negative",
-    tags: ["Earnings", "RVNL", "CONCOR", "PSU", "Infrastructure"],
-    location: {
-      state: null,
-      district: null,
-      is_national: true,
-    },
-    entities: {
-      people: [],
-      organizations: ["RVNL", "CONCOR"],
-      monetary_values: [],
-    },
-    financials: {
-      type: "Budget Allocation",
-      amount: null,
-      currency: "INR",
-      denomination: null,
-      status: "Completed",
-      industry: ["Railways", "Logistics"],
-    },
-    source_context: {
-      original_timestamp: "15:56",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "Raymond Board Approves ₹331 Crore Warrant Issue to Promoters at Discount",
-    summary:
-      "Raymond's board has cleared the issuance of 67 lakh warrants to JK Investors (promoters) at ₹497 per share. The issue price is at an 11% discount to the current market price of ₹560.",
-    category: "Economy",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 6,
-    sentiment: "Negative",
-    tags: [
-      "Raymond",
-      "Warrant Issue",
-      "Promoter Funding",
-      "Corporate Governance",
-    ],
-    location: {
-      state: "Maharashtra",
-      district: "Mumbai",
-      is_national: true,
-    },
-    entities: {
-      people: [],
-      organizations: ["Raymond", "JK Investors"],
-      monetary_values: ["₹331 Crore", "₹497", "₹560"],
-    },
-    financials: {
-      type: "Capex",
-      amount: 331,
-      currency: "INR",
-      denomination: "Crore",
-      status: "Announced",
-      industry: ["Textiles", "Retail"],
-    },
-    source_context: {
-      original_timestamp: "16:46",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline: "CNBC Awaaz Hosts Inaugural Bharat Economic Summit in New Delhi",
-    summary:
-      "The first edition of the Bharat Economic Summit has commenced at Taj Palace, New Delhi. The summit focuses on India's economic resilience amidst global energy challenges and geopolitical shifts.",
-    category: "Economy",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 5,
-    sentiment: "Positive",
-    tags: [
-      "Bharat Economic Summit",
-      "CNBC Awaaz",
-      "Economic Policy",
-      "New Delhi",
-    ],
-    location: {
-      state: "Delhi",
-      district: "New Delhi",
-      is_national: true,
-    },
-    entities: {
-      people: [],
-      organizations: ["CNBC Awaaz"],
-      monetary_values: [],
-    },
-    financials: null,
-    source_context: {
-      original_timestamp: "23:15",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline: "Awfis Space Solutions Reports Record Profit Growth of 108%",
-    summary:
-      "Co-working space provider Awfis reported its best-ever quarterly performance with a 108% jump in profit. Revenue grew by 21% as demand for flexible office spaces continues to surge.",
-    category: "Infrastructure",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 6,
-    sentiment: "Positive",
-    tags: ["Awfis", "Co-working", "Real Estate", "Earnings"],
-    location: {
-      state: null,
-      district: null,
-      is_national: true,
-    },
-    entities: {
-      people: [],
-      organizations: ["Awfis Space Solutions"],
-      monetary_values: ["₹108 Crore"],
-    },
-    financials: {
-      type: "Budget Allocation",
-      amount: 108,
-      currency: "INR",
-      denomination: "Crore",
-      status: "Completed",
-      industry: ["Real Estate", "Services"],
-    },
-    source_context: {
-      original_timestamp: "08:19",
-      broadcast_date: "2024-05-21",
-    },
-  },
-  {
-    headline:
-      "Bharat Electronics Receives Cumulative Order Update of ₹68 Crore",
-    summary:
-      "Bharat Electronics Limited (BEL) provided a cumulative update on existing orders totaling ₹68 crore. The stock remains in focus due to its strong technical chart structure and consistent order flow.",
-    category: "Infrastructure",
-    impact_scope: "National",
-    crime_severity: "NONE",
-    emergency_type: "NONE",
-    importance_score: 4,
-    sentiment: "Positive",
-    tags: ["BEL", "Defense Orders", "PSU", "Manufacturing"],
-    location: {
-      state: "Karnataka",
-      district: "Bengaluru",
-      is_national: true,
-    },
-    entities: {
-      people: [],
-      organizations: ["Bharat Electronics Limited"],
-      monetary_values: ["₹68 Crore"],
-    },
-    financials: {
-      type: "Grant",
-      amount: 68,
-      currency: "INR",
-      denomination: "Crore",
-      status: "Completed",
-      industry: ["Defense", "Electronics"],
-    },
-    source_context: {
-      original_timestamp: "17:39",
-      broadcast_date: "2024-05-21",
-    },
-  },
-];
+// const data = [
+//   {
+//     headline: "US-Iran Naval Conflict Triggers Global Crude Oil Price Spike",
+//     summary:
+//       "US forces reportedly sank an Iranian boat force, causing Brent crude prices to rise by $1 to $97.5 per barrel. This geopolitical escalation in the Strait of Hormuz is expected to impact the Indian Rupee and market volatility.",
+//     category: "Geopolitics",
+//     impact_scope: "International",
+//     crime_severity: "NONE",
+//     emergency_type: "WAR_CONFLICT",
+//     importance_score: 8,
+//     sentiment: "Negative",
+//     tags: [
+//       "Crude Oil",
+//       "US-Iran Tension",
+//       "Strait of Hormuz",
+//       "Energy Security",
+//     ],
+//     location: {
+//       state: null,
+//       district: null,
+//       is_national: false,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["US Navy", "Iranian Boat Force"],
+//       monetary_values: ["$97.5"],
+//     },
+//     financials: null,
+//     source_context: {
+//       original_timestamp: "00:40",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "Finance Minister Signals Potential Revisions to LTCG and STCG Tax Structures",
+//     summary:
+//       "Union Finance Minister Nirmala Sitharaman expressed openness to investor suggestions regarding Long-Term and Short-Term Capital Gains taxes during a meeting in Mumbai. This move is aimed at addressing FII concerns and stabilizing the Rupee.",
+//     category: "Politics",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 9,
+//     sentiment: "Positive",
+//     tags: ["LTCG", "STCG", "Tax Reform", "FII", "Nirmala Sitharaman"],
+//     location: {
+//       state: "Maharashtra",
+//       district: "Mumbai",
+//       is_national: true,
+//     },
+//     entities: {
+//       people: ["Nirmala Sitharaman"],
+//       organizations: ["Ministry of Finance"],
+//       monetary_values: [],
+//     },
+//     financials: {
+//       type: "Budget Allocation",
+//       amount: null,
+//       currency: "INR",
+//       denomination: null,
+//       status: "Announced",
+//       industry: ["Capital Markets", "Finance"],
+//     },
+//     source_context: {
+//       original_timestamp: "02:06",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "IGL Hikes CNG Prices in NCR by ₹2 per KG; Fourth Increase in 12 Days",
+//     summary:
+//       "Indraprastha Gas Limited (IGL) has announced a ₹2 per kg hike in CNG prices for the National Capital Region. This brings the total price increase to ₹6 per kg within the last 12 days, putting pressure on commuters.",
+//     category: "Economy",
+//     impact_scope: "District",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 6,
+//     sentiment: "Negative",
+//     tags: ["CNG Price Hike", "IGL", "NCR", "Inflation"],
+//     location: {
+//       state: "Delhi",
+//       district: "NCR",
+//       is_national: false,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["Indraprastha Gas Limited"],
+//       monetary_values: ["₹2 per kg", "₹6 per kg"],
+//     },
+//     financials: null,
+//     source_context: {
+//       original_timestamp: "10:50",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "Tata Sons Board to Review Strategic Turnaround Plans for Air India and Tata Digital",
+//     summary:
+//       "Chairman N. Chandrasekaran will present turnaround strategies for Air India, Tata Digital, and Tata Electronics to the Tata Sons board. The meeting may also touch upon the highly anticipated Tata Sons listing.",
+//     category: "Infrastructure",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 7,
+//     sentiment: "Neutral",
+//     tags: [
+//       "Tata Sons",
+//       "Air India",
+//       "Tata Digital",
+//       "IPO",
+//       "N. Chandrasekaran",
+//     ],
+//     location: {
+//       state: "Maharashtra",
+//       district: "Mumbai",
+//       is_national: true,
+//     },
+//     entities: {
+//       people: ["N. Chandrasekaran"],
+//       organizations: [
+//         "Tata Sons",
+//         "Air India",
+//         "Tata Digital",
+//         "Tata Electronics",
+//         "Tata Chemicals",
+//       ],
+//       monetary_values: [],
+//     },
+//     financials: {
+//       type: "Capex",
+//       amount: null,
+//       currency: null,
+//       denomination: null,
+//       status: "Announced",
+//       industry: ["Aviation", "Technology", "Electronics"],
+//     },
+//     source_context: {
+//       original_timestamp: "09:47",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "Institutional Giants Absorb Large Stakes in Premier Energies and Global Health",
+//     summary:
+//       "Promoters of Premier Energies and Global Health (Medanta) sold significant equity stakes, which were bought by major investors including Nomura, HDFC Mutual Fund, and Abu Dhabi Investment Authority. Premier Energies saw 2.4 crore shares traded at ₹955.",
+//     category: "Economy",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 7,
+//     sentiment: "Positive",
+//     tags: [
+//       "Block Deal",
+//       "Premier Energies",
+//       "Medanta",
+//       "Institutional Investment",
+//     ],
+//     location: {
+//       state: null,
+//       district: null,
+//       is_national: true,
+//     },
+//     entities: {
+//       people: ["Sunil Sachdeva"],
+//       organizations: [
+//         "Premier Energies",
+//         "Global Health",
+//         "Nomura",
+//         "HDFC Mutual Fund",
+//         "Abu Dhabi Investment Authority",
+//         "Quant Mutual Fund",
+//       ],
+//       monetary_values: ["₹955", "₹1225"],
+//     },
+//     financials: {
+//       type: "FDI",
+//       amount: null,
+//       currency: "INR",
+//       denomination: null,
+//       status: "Completed",
+//       industry: ["Renewable Energy", "Healthcare"],
+//     },
+//     source_context: {
+//       original_timestamp: "04:02",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "RVNL and CONCOR Report Weak Q3 Earnings Amid Execution Challenges",
+//     summary:
+//       "Rail Vikas Nigam Limited (RVNL) reported a 58% drop in profit despite a growing order book, while Container Corporation (CONCOR) saw a 12% decline in profit. Both companies struggled with execution and margin contraction.",
+//     category: "Economy",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 7,
+//     sentiment: "Negative",
+//     tags: ["Earnings", "RVNL", "CONCOR", "PSU", "Infrastructure"],
+//     location: {
+//       state: null,
+//       district: null,
+//       is_national: true,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["RVNL", "CONCOR"],
+//       monetary_values: [],
+//     },
+//     financials: {
+//       type: "Budget Allocation",
+//       amount: null,
+//       currency: "INR",
+//       denomination: null,
+//       status: "Completed",
+//       industry: ["Railways", "Logistics"],
+//     },
+//     source_context: {
+//       original_timestamp: "15:56",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "Raymond Board Approves ₹331 Crore Warrant Issue to Promoters at Discount",
+//     summary:
+//       "Raymond's board has cleared the issuance of 67 lakh warrants to JK Investors (promoters) at ₹497 per share. The issue price is at an 11% discount to the current market price of ₹560.",
+//     category: "Economy",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 6,
+//     sentiment: "Negative",
+//     tags: [
+//       "Raymond",
+//       "Warrant Issue",
+//       "Promoter Funding",
+//       "Corporate Governance",
+//     ],
+//     location: {
+//       state: "Maharashtra",
+//       district: "Mumbai",
+//       is_national: true,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["Raymond", "JK Investors"],
+//       monetary_values: ["₹331 Crore", "₹497", "₹560"],
+//     },
+//     financials: {
+//       type: "Capex",
+//       amount: 331,
+//       currency: "INR",
+//       denomination: "Crore",
+//       status: "Announced",
+//       industry: ["Textiles", "Retail"],
+//     },
+//     source_context: {
+//       original_timestamp: "16:46",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline: "CNBC Awaaz Hosts Inaugural Bharat Economic Summit in New Delhi",
+//     summary:
+//       "The first edition of the Bharat Economic Summit has commenced at Taj Palace, New Delhi. The summit focuses on India's economic resilience amidst global energy challenges and geopolitical shifts.",
+//     category: "Economy",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 5,
+//     sentiment: "Positive",
+//     tags: [
+//       "Bharat Economic Summit",
+//       "CNBC Awaaz",
+//       "Economic Policy",
+//       "New Delhi",
+//     ],
+//     location: {
+//       state: "Delhi",
+//       district: "New Delhi",
+//       is_national: true,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["CNBC Awaaz"],
+//       monetary_values: [],
+//     },
+//     financials: null,
+//     source_context: {
+//       original_timestamp: "23:15",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline: "Awfis Space Solutions Reports Record Profit Growth of 108%",
+//     summary:
+//       "Co-working space provider Awfis reported its best-ever quarterly performance with a 108% jump in profit. Revenue grew by 21% as demand for flexible office spaces continues to surge.",
+//     category: "Infrastructure",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 6,
+//     sentiment: "Positive",
+//     tags: ["Awfis", "Co-working", "Real Estate", "Earnings"],
+//     location: {
+//       state: null,
+//       district: null,
+//       is_national: true,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["Awfis Space Solutions"],
+//       monetary_values: ["₹108 Crore"],
+//     },
+//     financials: {
+//       type: "Budget Allocation",
+//       amount: 108,
+//       currency: "INR",
+//       denomination: "Crore",
+//       status: "Completed",
+//       industry: ["Real Estate", "Services"],
+//     },
+//     source_context: {
+//       original_timestamp: "08:19",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+//   {
+//     headline:
+//       "Bharat Electronics Receives Cumulative Order Update of ₹68 Crore",
+//     summary:
+//       "Bharat Electronics Limited (BEL) provided a cumulative update on existing orders totaling ₹68 crore. The stock remains in focus due to its strong technical chart structure and consistent order flow.",
+//     category: "Infrastructure",
+//     impact_scope: "National",
+//     crime_severity: "NONE",
+//     emergency_type: "NONE",
+//     importance_score: 4,
+//     sentiment: "Positive",
+//     tags: ["BEL", "Defense Orders", "PSU", "Manufacturing"],
+//     location: {
+//       state: "Karnataka",
+//       district: "Bengaluru",
+//       is_national: true,
+//     },
+//     entities: {
+//       people: [],
+//       organizations: ["Bharat Electronics Limited"],
+//       monetary_values: ["₹68 Crore"],
+//     },
+//     financials: {
+//       type: "Grant",
+//       amount: 68,
+//       currency: "INR",
+//       denomination: "Crore",
+//       status: "Completed",
+//       industry: ["Defense", "Electronics"],
+//     },
+//     source_context: {
+//       original_timestamp: "17:39",
+//       broadcast_date: "2024-05-21",
+//     },
+//   },
+// ];
 
-export default data;
+// export default data;

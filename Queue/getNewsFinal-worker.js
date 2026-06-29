@@ -25,19 +25,24 @@ const workerFinal = new Worker(
     const newsJson = await getNewsJson(job.data.transcript);
 
     // /fix change back to 1 min
-    await sleep(60000); // for one min
+    await sleep(30000); // for 30 sec
 
     if (!newsJson) {
       throw new Error('unable to get newsJson');
     }
 
-    console.log(`[Final] AI extracted ${newsJson.length} news items for transcript ${job.data.id}`);
+    console.log(
+      `[Final] AI extracted ${newsJson.length} news items for transcript ${job.data.id}`
+    );
     const save = new handleAIAndSave(newsJson);
     const result = await save.saveData();
     console.log('[Final] Save complete for transcript:', job.data.id);
     return result;
   },
-  { connection }
+  {
+    connection,
+    lockDuration: process.env.LOCK_DURATION,
+  }
 );
 
 // console.log('working _ before completed');

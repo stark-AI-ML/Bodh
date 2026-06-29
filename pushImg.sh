@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # as i have enough of rebuilding img fuck it
 
 echo "Enter version (e.g. 0.1, 0.2, 1.0):"

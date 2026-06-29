@@ -3,6 +3,8 @@ import { firefox } from 'playwright';
 //  i have written update some where if you come here again please do....
 
 import pool from '../DB/postgres/dbConfig.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // import news from '../tempNewsData.js';
 
@@ -17,7 +19,8 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const BROWSER_TTL = 15 * 60 * 1000; // 15 min
+// const BROWSER_TTL = 15 * 60 * 1000; // 15
+const BROWSER_TTL = process.env.BROWSER_WINDOW;
 // const BROWSER_TTL = 60 * 1000;
 async function getBrowser() {
   const now = Date.now();

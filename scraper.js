@@ -20,6 +20,10 @@ channelQueueWorker.on('failed', (job, err) => {
   console.error(`[Channel] Job ${job.id} failed: ${err.message}`);
 });
 
+channelQueueWorker.on('completed', (job, result) => {
+  console.log(`[Channel] Job ${job.id} completed:`, result);
+});
+
 console.log('Workers running...');
 
 // shutdown

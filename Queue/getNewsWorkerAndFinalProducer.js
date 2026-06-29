@@ -49,7 +49,6 @@ const finalNewsQueue = new Queue('final-save', {
 const channelQueueWorker = new Worker(
   'channels-queue',
   async (job) => {
-    
     console.log('[Channel] Processing:', job.data.channelName);
 
     const key = process.env.GEMINI_KEY_YT;
@@ -122,6 +121,7 @@ const channelQueueWorker = new Worker(
   {
     connection: connection,
     concurrency: 1,
+    lockDuration: process.env.LOCK_DURATION,
   }
 );
 

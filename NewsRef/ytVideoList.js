@@ -175,22 +175,20 @@ class VIDEO_LIST {
       let collectedVideos = [];
 
       while (collectedVideos.length < 19) {
-        const searchResponse = await youtube.search.list({
+        const playlistResponse = await youtube.playlistItems.list({
           part: 'snippet',
-          channelId: CHANNEL_ID,
+          playlistId: uploadsPlaylistId,
           maxResults: 40,
-          order: 'date',
-          type: 'video',
           pageToken: nextPageToken,
         });
-        // console.log(searchResponse);
+        // console.log(playlistResponse);
 
-        const searchItems = searchResponse.data.items;
-        nextPageToken = searchResponse.data.nextPageToken;
+        const searchItems = playlistResponse.data.items;
+        nextPageToken = playlistResponse.data.nextPageToken;
 
         if (!searchItems.length) break;
 
-        const videoIds = searchItems.map((item) => item.id.videoId);
+        const videoIds = searchItems.map((item) => item.snippet.resourceId.videoId);
 
         const videosResponse = await youtube.videos.list({
           part: 'contentDetails',
@@ -204,7 +202,7 @@ class VIDEO_LIST {
 
         const filtered = searchItems
           .map((item) => {
-            const videoId = item.id.videoId;
+            const videoId = item.snippet.resourceId.videoId;
 
             return {
               videoId,
@@ -229,6 +227,8 @@ class VIDEO_LIST {
       }
       // console.log(collectedVideos);
       const sortedMature = this.#sortMatureNews(collectedVideos);
+
+      console.log(`[VIDEO_LIST] ${this.#ChannelConfig.channelName}: Collected ${collectedVideos.length} videos, passed maturity filter: ${sortedMature.length}`);
 
       sortedMature.sort(
         (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)

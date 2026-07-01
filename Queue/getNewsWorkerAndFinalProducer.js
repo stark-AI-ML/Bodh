@@ -99,6 +99,8 @@ const channelQueueWorker = new Worker(
         const row = result.rows[i];
         await finalNewsQueue.add('get-transcript-json', row, {
           jobId: `transcript-${row.id}`,
+          delay: i * 15000, // adding this delay as production gets high cpu spikes so,
+          //  this stagger the final-save job  might not be best but will do the task
           removeOnComplete: true,
           removeOnFail: { age: 40 * 60 },
           attempts: 2,
